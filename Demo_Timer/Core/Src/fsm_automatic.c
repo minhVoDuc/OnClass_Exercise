@@ -9,12 +9,14 @@
 
 void fsm_automatic_run(){
 	switch (status){
-		case 0:
+		case INIT:
 				break;
-
-		case 1:
+		case AUTO_RED:
 				break;
-
+		case AUTO_GREEN:
+				break;
+		case AUTO_YELLOW:
+				break;
 		default: break;
 	}
 }
