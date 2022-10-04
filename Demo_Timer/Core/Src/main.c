@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
+#include "fsm_automatic.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,16 +95,13 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer(0, 200);
+  //setTimer(0, 200);
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	if (timer_flag[0]==1){
-		setTimer(0, 200);
-		HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
-	}
+	fsm_automatic_run();
   }
   /* USER CODE END 3 */
 }

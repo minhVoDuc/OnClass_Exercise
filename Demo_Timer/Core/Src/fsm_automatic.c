@@ -10,13 +10,38 @@
 void fsm_automatic_run(){
 	switch (status){
 		case INIT:
-				break;
+			HAL_GPIO_WritePin(GPIOA, LED_RED_Pin | LED_GREEN_Pin | LED_YELLOW_Pin, 1);
+
+			status = AUTO_RED;
+			setTimer(LED_INDEX, 500);
+			break;
 		case AUTO_RED:
-				break;
+			//TODO
+			HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, 0);
+
+			if (timer_flag[LED_INDEX] == 1){
+				status = AUTO_GREEN;
+				setTimer(LED_INDEX, 300);
+			}
+			break;
 		case AUTO_GREEN:
-				break;
+			//TODO
+			HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin, 0);
+
+			if (timer_flag[LED_INDEX] == 1){
+				status = AUTO_YELLOW;
+				setTimer(LED_INDEX, 200);
+			}
+			break;
 		case AUTO_YELLOW:
-				break;
+			//TODO
+			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_Pin, 0);
+
+			if (timer_flag[LED_INDEX] == 1){
+				status = AUTO_RED;
+				setTimer(LED_INDEX, 500);
+			}
+			break;
 		default: break;
 	}
 }
