@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
 #include "fsm_automatic.h"
+#include "global.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,11 +92,11 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  status = INIT;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  //setTimer(0, 200);
   while (1)
   {
     /* USER CODE END WHILE */
