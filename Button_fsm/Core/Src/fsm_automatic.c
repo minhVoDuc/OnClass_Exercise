@@ -10,39 +10,36 @@
 void fsm_automatic_run(){
 	switch (status){
 		case INIT:
-			HAL_GPIO_WritePin(GPIOA, LED_RED_Pin | LED_GREEN_Pin | LED_YELLOW_Pin, 1);
-
-			status = AUTO_GREEN;
-			setTimer(LED_INDEX, 300);
+			clearLight();
+			status = AUTO_RED;
+			setTimer(5000);
 			break;
 		case AUTO_RED:
 			//TODO
-			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_Pin, 1);
-			HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, 0);
-
-			if (timer_flag[LED_INDEX] == 1){
+			turnLightOn(LED_RED);
+			if (timer_flag == 1){
 				status = AUTO_GREEN;
-				setTimer(LED_INDEX, 300);
+				setTimer(3000);
+			}
+			if (isButton1Pressed()){
+				status = MAN_RED;
+				setTimer(10000);
 			}
 			break;
 		case AUTO_GREEN:
 			//TODO
-			HAL_GPIO_WritePin(GPIOA, LED_RED_Pin, 1);
-			HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin, 0);
-
-			if (timer_flag[LED_INDEX] == 1){
+			turnLightOn(LED_GREEN);
+			if (timer_flag == 1){
 				status = AUTO_YELLOW;
-				setTimer(LED_INDEX, 200);
+				setTimer(2000);
 			}
 			break;
 		case AUTO_YELLOW:
 			//TODO
-			HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin, 1);
-			HAL_GPIO_WritePin(GPIOA, LED_YELLOW_Pin, 0);
-
-			if (timer_flag[LED_INDEX] == 1){
+			turnLightOn(LED_YELLOW);
+			if (timer_flag == 1){
 				status = AUTO_RED;
-				setTimer(LED_INDEX, 500);
+				setTimer(5000);
 			}
 			break;
 		default: break;

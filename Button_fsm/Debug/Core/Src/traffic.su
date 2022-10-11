@@ -1,0 +1,2 @@
+traffic.c:10:6:turnLightOn	16	static
+traffic.c:29:6:clearLight	8	static

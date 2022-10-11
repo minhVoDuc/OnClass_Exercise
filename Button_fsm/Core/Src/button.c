@@ -13,10 +13,19 @@ int KeyReg2 = NORMAL_STATE;
 int KeyReg3 = NORMAL_STATE;
 
 int TimeOutForKeyPress =  500;
-int timer_flag = 0;
+int button1_flag = 0;
+
+int isButton1Pressed(){
+	if (button1_flag == 1){
+		button1_flag = 0;
+		return 1;
+	}
+	return 0;
+}
 
 void subKeyProcess(){
-	timer_flag = 0;
+//	timer_flag[TIMER_BUTTON] = 0;
+	button1_flag = 1;
 }
 
 void getKeyInput(){
@@ -29,8 +38,7 @@ void getKeyInput(){
 
       if (KeyReg3 == PRESSED_STATE){
         TimeOutForKeyPress = 500;
-        //subKeyProcess();
-        timer_flag = 1;
+        subKeyProcess();
       }
     } else {
        TimeOutForKeyPress --;

@@ -13,8 +13,9 @@
 #define NORMAL_STATE 1
 #define PRESSED_STATE 0
 
-extern int timer_flag;
+int button1_flag;
 
+int isButton1Pressed();
 void getKeyInput();
 
 #endif /* INC_BUTTON_H_ */
