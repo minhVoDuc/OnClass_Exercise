@@ -7,5 +7,5 @@
 
 #include "global.h"
 
-int Error_code_G = 0
+int Error_code_G = 0;
 
