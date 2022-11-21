@@ -57,7 +57,8 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void toggle_led();
+void toggle_led0();
+void toggle_led1();
 /* USER CODE END 0 */
 
 /**
@@ -96,7 +97,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   SCH_Init();
-  SCH_Add_Task(toggle_led, 500, 500);
+  SCH_Add_Task(toggle_led0, 0, 5000);
+  SCH_Add_Task(toggle_led1, 2000, 1000);
   while (1)
   {
     /* USER CODE END WHILE */
@@ -200,14 +202,14 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_TEST_GPIO_Port, LED_TEST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_TEST_Pin|LED_TEST_1_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED_TEST_Pin */
-  GPIO_InitStruct.Pin = LED_TEST_Pin;
+  /*Configure GPIO pins : LED_TEST_Pin LED_TEST_1_Pin */
+  GPIO_InitStruct.Pin = LED_TEST_Pin|LED_TEST_1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_TEST_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
 
@@ -217,8 +219,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	SCH_Update();
 }
 
-void toggle_led(){
+void toggle_led0(){
 	HAL_GPIO_TogglePin(GPIOA, LED_TEST_Pin);
+}
+
+void toggle_led1(){
+	HAL_GPIO_TogglePin(GPIOA, LED_TEST_1_Pin);
 }
 /* USER CODE END 4 */
 
