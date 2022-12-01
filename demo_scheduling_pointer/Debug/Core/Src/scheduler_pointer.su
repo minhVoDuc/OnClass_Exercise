@@ -1,9 +1,8 @@
 scheduler_pointer.c:15:6:SCH_Init	4	static
-scheduler_pointer.c:20:6:SCH_Start	4	static
-scheduler_pointer.c:24:6:SCH_Add_To_List	32	static
-scheduler_pointer.c:56:12:SCH_Get_From_List	16	static
-scheduler_pointer.c:64:6:SCH_Update	4	static
-scheduler_pointer.c:82:6:SCH_Dispatch_Tasks	16	static
-scheduler_pointer.c:99:6:SCH_Report_Status	4	static
-scheduler_pointer.c:103:6:SCH_Add_Task	32	static
-scheduler_pointer.c:114:10:SCH_Delete_Task	16	static
+scheduler_pointer.c:20:6:SCH_Add_To_List	32	static
+scheduler_pointer.c:55:12:SCH_Get_From_List	16	static
+scheduler_pointer.c:63:6:SCH_Update	4	static
+scheduler_pointer.c:81:6:SCH_Dispatch_Tasks	16	static
+scheduler_pointer.c:98:6:SCH_Report_Status	4	static
+scheduler_pointer.c:102:6:SCH_Add_Task	32	static
+scheduler_pointer.c:113:10:SCH_Delete_Task	16	static

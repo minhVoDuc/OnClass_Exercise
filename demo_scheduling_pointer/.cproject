@@ -175,4 +175,5 @@
 			<resource resourceType="PROJECT" workspacePath="/demo_scheduling_pointer"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>

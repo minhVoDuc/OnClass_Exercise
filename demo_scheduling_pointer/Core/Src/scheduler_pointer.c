@@ -17,25 +17,22 @@ void SCH_Init(){
 	SCH_tasks_G.head = NULL;
 }
 
-void SCH_Start(){
-
-}
-
 void SCH_Add_To_List(schedTask *task){
+	if (SCH_tasks_G.cur_size == SCH_MAX_TASKS) return;
 	SCH_tasks_G.cur_size++;
 	//add first task
 	if (SCH_tasks_G.cur_size == 1){
 		SCH_tasks_G.head = task;
 		return;
 	}
-	uint32_t time_interval = SCH_tasks_G.head->Delay;
+	uint32_t time_interval = 0;
 	schedTask *currTask = SCH_tasks_G.head,
 			  *prevTask = NULL;
 	while(currTask) {
+		time_interval += currTask->Delay;
 		if (task->Delay < time_interval) break;
 		prevTask = currTask;
 		currTask = currTask->nextTask;
-		if (currTask != NULL) time_interval += currTask->Delay;
 	}
 	if (prevTask == NULL) { //before first element of the list
 		SCH_tasks_G.head->Delay -= task->Delay;
@@ -47,7 +44,9 @@ void SCH_Add_To_List(schedTask *task){
 		task->Delay -= time_interval;
 	}
 	else { //added task is between 2 elements of the list
+		uint32_t tmp = task->Delay;
 		task->Delay -= (time_interval - currTask->Delay);
+		currTask->Delay = time_interval - tmp;
 	}
 	task->nextTask = currTask;
 	prevTask->nextTask = task;
@@ -81,13 +80,13 @@ void SCH_Update(void){
 
 void SCH_Dispatch_Tasks(void){
 	//dispatching (running) the next task (if one is ready)
-	if (SCH_tasks_G.head->RunMe > 0) {
+	while (SCH_tasks_G.head->RunMe > 0) {
 		(*SCH_tasks_G.head->pTask)(); //run the task
 		SCH_tasks_G.head->RunMe = 0; //reset RunMe flag
 		//periodic tasks will auto run again
 		//if it's a 'oneshot' task, remove it from the array
 		schedTask *reTask = SCH_Get_From_List();
-		if (SCH_tasks_G.head->Period != 0){
+		if (reTask->Period != 0){
 			SCH_Add_To_List(reTask);
 		}
 		else {
